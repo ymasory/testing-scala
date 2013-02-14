@@ -591,12 +591,13 @@ object MyPlugins extends Build {
   <pre class="brush: scala;">
 class HelloWorldSpec extends Specification { def is =
 
-    "This is a specification to check the 'Hello world' string"                 ^
-                                                                                p^
-    "The 'Hello world' string should"                                           ^
-      "contain 11 characters"                                                   ! e1^
-      "end with 'world'"                                                        ! e2^
-                                                                                end
+    "Spec of the 'Hello world' string"  ^
+                                        p^
+    "The 'Hello world' string should"   ^
+      "contain 11 characters"           ! e1^
+      "end with 'world'"                ! e2^
+                                        end
+
     def e1 = "Hello world" must have size(11)
     def e2 = "Hello world" must endWith("world")
 }
@@ -608,20 +609,37 @@ class HelloWorldSpec extends Specification { def is =
   <pre class="brush: scala;">
 class HelloWorldSpec extends Specification { def is =
 
-    "This is a specification to check the 'Hello world' string"                 ^
-                                                                                p^
-    "The 'Hello world' string should"                                           ^
-      "contain 11 characters"                                                   ! {
+    "Spec of the 'Hello world' string"      ^
+                                            p^
+    "The 'Hello world' string should"       ^
+      "contain 11 characters"               ! {
         "Hello world" must have size(11)
-      }
-      "end with 'world'"                                                        ! {
+      }                                     ^
+      "end with 'world'"                    ! {
         "Hello world" must endWith("world")
-      }
-                                                                                end
+      }                                     ^end
 }
   </pre>
 </section>
 
+
+<section class="slide">
+  <h2>Specs2 Syntax</h2>
+  <ul>
+    <li class="slide"><h3>Scala on the left, brainfuck on the right.</h3></li>
+    <li class="slide"><h3>Alignment isn't that annoying, and most editors/IDEs support column editing.</h3></li>
+    <li class="slide"><h3>Push the brainfuck part wayy to the right. My space in slides is limited.</h3></li>
+    <li class="slide">
+      <h3>
+        Chaining expectations with explicit combinators, instead of relying on exceptions, brings enormous benefits
+        in terms of implementation, parallelism, specification generation, etc.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>Mutability was the biggest reason Specs was re-written. <a href="http://etorreborre.github.com/specs2/guide/org.specs2.guide.Philosophy.html#Philosophy">Read this.</a></h3>
+    </li>
+  </ul>
+</section>
 
 <section class="slide">
   <h2>Gotcha!</h2>
@@ -643,22 +661,6 @@ class HelloWorldSpec extends Specification { def is =
   </ul>
 </section>
 
-<section class="slide">
-  <h2>Specs2 Syntax</h2>
-  <ul>
-    <li class="slide"><h3>Scala on the left, brainfuck on the right.</h3></li>
-    <li class="slide"><h3>Alignment isn't that annoying, and most editors/IDEs support column editing.</h3></li>
-    <li class="slide">
-      <h3>
-        Chaining expectations with explicit combinators, instead of relying on exceptions, brings enormous benefits
-        in terms of implementation, parallelism, specification generation, etc.
-      </h3>
-    </li>
-    <li class="slide">
-      <h3>Mutability was the biggest reason Specs was re-written. <a href="http://etorreborre.github.com/specs2/guide/org.specs2.guide.Philosophy.html#Philosophy">Read this.</a></h3>
-    </li>
-  </ul>
-</section>
 
 <section class="slide">
   <h2>Demo: the Specs2 User Guide</h2>
@@ -691,7 +693,7 @@ class HelloWorldSpec extends Specification { def is =
     <li class="slide">
       <h3>
         When wielded with grace and style, your tests become executable documentation and an executable specification
-        that never falls out of date.
+        that never fall out of date.
       </h3>
     </li>
     <li class="slide">
