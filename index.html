@@ -171,7 +171,7 @@
       "I don't know if A is true, but if it is, B must also be true!"
     </li>
     <li class="slide">
-      E.g., "I know what the 10 * 9 is, but it must be less than 10 * 10!"
+      E.g., "I don't know what the 10 * 9 is, but it must be less than 10 * 10!"
     </li>
   </ul>
   <h3 class="slide">Fuzzing</h3>
@@ -294,14 +294,14 @@
       <span>ensuring a function</span>
       <pre class="brush: scala;">
         def square(x: Double) =
-          (d * d) ensuring { _ >= 0 }
+          (x * x) ensuring { _ >= 0 }
       </pre>
     </li>
     <li class="slide">
       <span>ensuring a function, with an error message</span>
       <pre class="brush: scala;">
         def square(x: Double) =
-          (d * d) ensuring (
+          (x * x) ensuring (
             _ >= 0,
             "result should not be negative"
           )
