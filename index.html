@@ -423,8 +423,8 @@ class ExampleSuite extends FunSuite {
   test("pop is invoked on a non-empty stack") {
  
     val stack = new Stack[Int]
-    stack.push(1)
-    stack.push(2)
+    stack push 1
+    stack push 2
     val oldSize = stack.size
     val result = stack.pop()
     assert(result === 2)
@@ -443,8 +443,8 @@ class ExampleSpec extends FunSpec {
 
     it("should pop values in last-in-first-out order") {
       val stack = new Stack[Int]
-      stack.push(1)
-      stack.push(2)
+      stack push 1
+      stack push 2
       assert(stack.pop() === 2)
       assert(stack.pop() === 1)
     }
