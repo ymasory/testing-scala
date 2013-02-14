@@ -64,36 +64,491 @@
 </section>
 
 
-<!-- SECTION A: catch blocks. -->
+<!-- SECTION 1: some terminology. -->
 
 <section class="slide">
-  <h1>Section A:<br> Basic exception handling</h1>
+  <h1>Section I:<br>Some Names & Terminology</h1>
 </section>
 
 <section class="slide">
-  <h2>
-    Since Scala's try/catch blocks use pattern matching,
-    this section is just a review of what patterns are available to you.
-  </h2>
+  <h2>Levels of testing</h2>
+  <ul>
+    <li class="slide"><h3>Unit testing</h3></li>
+    <li class="slide"><h3>Integration testing</h3></li>
+    <li class="slide"><h3>System testing</h3></li>
+    <li class="slide"><h3>Acceptance testing</h3></li>
+  </ul>
 </section>
 
 <section class="slide">
-  <h2>Consider this function</h2>
-<pre class="brush: scala;">
-import scala.io.Source
-
-def readFile(path: String) =
-  (Source fromFile path).mkString()
-</pre>
+  <h2>Styles of <em>developing</em> tests</h2>
+  <ul>
+    <li class="slide"><h3>Test-driven development</h3></li>
+    <li class="slide"><h3>Behavior-driven development</h3></li>
+  </ul>
 </section>
-
-
-<!-- THE END -->
 
 <section class="slide">
-  <h1>Thank you!</h1>
-  <h2>The end.</h2>
+  <h2>Testing techniques</h2>
+  <ul>
+    <li class="slide"><h3>Hand-written assertions</h3></li>
+    <li class="slide"><h3>Assertions with matchers</h3></li>
+    <li class="slide"><h3>Property-based testing</h3></li>
+    <li class="slide"><h3>Metamorphic testing</h3></li>
+    <li class="slide"><h3>Object mocking</h3></li>
+  </ul>
 </section>
+
+<section class="slide">
+  <h2>Major Scala test frameworks</h2>
+  <ul>
+    <li class="slide"><h3>Specs2 - BDD</h3></li>
+    <li class="slide"><h3>ScalaTest - TDD alone, BDD</h3></li>
+    <li class="slide"><h3>ScalaCheck - PBT</h3></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Major Scala test libraries</h2>
+  <h3 class="slide">
+    (You, or more likely your test framework, integrate these tools.)
+  </h3>
+  <ul>
+    <li class="slide"><h3>ScalaMock - object mocking</h3></li>
+    <li class="slide"><h3>Expecty - power assertions with macros</h3></li>
+  </ul>
+</section>
+
+
+<section class="slide">
+  <h2>Big question for your framework</h2>
+  <h3 class="slide">Should tests have a type?</h3>
+  <ul>
+    <li class="slide"><h3>ScalaTest, JUnit, TestNG, etc - NO</h3></li>
+    <li class="slide">
+      <h3>
+        <a href="http://scalatypes.com/episode-21-bill-venners-on-scala-types">
+          Interview with Bill Venners on ScalaTest
+        </a>
+      </h3>
+    </li>
+    <li class="slide"><h3>Specs2 - YES</h3></li>
+    <li class="slide"><h3>
+        <a href="http://scalatypes.com/episode-23-eric-torreborre-on-specs2">
+          Interview with Eric Torreborre on Specs2
+        </a>
+    </h3></li>
+  </ul>
+</section>
+
+
+<!-- SECTION 2: Scala -->
+
+<section class="slide">
+  <h1>Section II:<br>scala.Predef</h1>
+</section>
+
+<section class="slide">
+  <h2>scala.Predef</h2>
+  <ul>
+    <li class="slide">
+      <h3>Predef's members are available in every scope, like Haskell's Prelude, or the classes in java.lang._</h3>
+    </li>
+    <li class="slide">
+      <h3>Predef provides various handy functions and values (like the identity function).</h3>
+    </li>
+    <li class="slide">
+      <h3>Assertion methods live in Predef.</h3>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Assertions</h2>
+  <h3 class="slide">Assertions throw an AssertionError</h3>
+  <ul>
+    <li class="slide">
+      <h3>asserting a boolean</h3>
+      <pre class="brush: scala;">
+        assert(i > 0)
+      </pre>
+    </li>
+    <li class="slide">
+      <h3>asserting a boolean, with an error message</h3>
+      <pre class="brush: scala;">
+        assert(i > 0, "must be positive")
+      </pre>
+    </li>
+
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Require</h2>
+  <h3 class="slide">Just like assert, but throws an IllegalArgumentException</h3>
+  <ul>
+    <li class="slide">
+      <h3>requiring a boolean</h3>
+      <pre class="brush: scala;">
+        require(i > 0)
+      </pre>
+    </li>
+    <li class="slide">
+      <h3>require a boolean, with an error message</h3>
+      <pre class="brush: scala;">
+        require(i > 0, "argument must be positive")
+      </pre>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Ensuring</h2>
+  <h3 class="slide">Tests post-conditions, just as require tests pre-conditions.</h3>
+  <h3 class="slide">Is Scala Eiffel?!</h3>
+  <ul>
+    <li class="slide">
+      <span>ensuring a function</span>
+      <pre class="brush: scala;">
+        def square(x: Double) =
+          (d * d) ensuring { _ >= 0 }
+      </pre>
+    </li>
+    <li class="slide">
+      <span>ensuring a function, with an error message</span>
+      <pre class="brush: scala;">
+        def square(x: Double) =
+          (d * d) ensuring (
+            _ >= 0,
+            "result should not be negative"
+          )
+      </pre>
+    </li>
+    <li class="slide">
+      You can also ensure a boolean. But why?!
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Assume</h2>
+  <h3 class="slide">Assume has exactly the same (overloaded) signature as assert.</h3>
+  <h3 class="slide">I don't understand the purpose of assume.</h3>
+</section>
+
+<section class="slide">
+  <h2>Should I use Predef assertions?</h2>
+  <ul>
+    <li class="slide"><h3>No. Next question?</h3></li>
+    <li class="slide"><h3>Runtime assertions are a lame cop out for real testing and better types.</h3></li>
+    <li class="slide">
+      <h3>
+        Using them in your test code is ok, but your test framework will have its own way of doing things.
+      </h3>
+    </li>
+    <li class="slide"><h3>Predef assertions are probably ok in scripts.</h3></li>
+  </ul>
+</section>
+
+
+<!-- SECTION 3: ScalaCheck. -->
+
+<section class="slide">
+  <h1>Section III:<br>ScalaCheck</h1>
+</section>
+
+<section class="slide">
+  <h2>ScalaCheck Example</h2>
+  <pre class="brush: scala;">
+import org.scalacheck.Properties
+import org.scalacheck.Prop.forAll
+
+object StringSpec extends Properties("String") {
+
+  property("startsWith") = forAll {
+      (a: String, b: String) =>
+        (a+b).startsWith(a)
+    }
+
+  property("concatenate") =
+    forAll { (a: String, b: String) =>
+      (a+b).length > a.length &&
+      (a+b).length > b.length
+    }
+}
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Example Output</h2>
+  <pre>
+$ scalac -cp scalacheck.jar StringSpecification.scala
+
+$ scala -cp .:scalacheck.jar StringSpecification
++ String.startsWith: OK, passed 100 tests.
+! String.concat: Falsified after 0 passed tests.
+> ARG_0: ""
+> ARG_1: ""
+  </pre>
+</section>
+
+<section class="slide">
+  <h2>Thoughts on ScalaCheck</h2>
+  <ul>
+    <li class="slide">
+      <h3>
+        Property-based testing involves the random generation of many unit tests.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        PBT requires you to figure out how to randomly generate mocked versions of
+        models and resources.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        In return for that effort, PBT offers the most robust correctness guarantees.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        PBT isn't always practical.
+        It's usually used as a supplement to BDD, not as a complete testing solution.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        ScalaCheck is extremely different from ScalaTest and Specs2 and deserves
+        its own talk.
+      </h3>
+    </li>
+  </ul>
+</section>
+
+<!-- SECTION 3: ScalaTest -->
+
+<section class="slide">
+  <h1>Section III:<br>ScalaTest</h1>
+</section>
+
+<section class="slide">
+  <h2>Aside: continuous integration</h2>
+  <ul>
+    <li class="slide">
+      <h3>
+        ScalaTest is getting native JUnit XML output in the future.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+    Until then, there's <a href="https://github.com/hydrasi/junit_xml_listener">hydrasi/junit_xml_listener</a>,
+    an sbt plugin.
+      </h3>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Using the JUnit XML Listener</h2>
+  <ul>
+    <li class="slide">
+    <span>In <code>project/plugins/project/PluginBuild.scala</code></span>
+    <pre class="brush: scala;">
+import sbt._
+
+object MyPlugins extends Build {
+  lazy val root = Project("root", file(".")) dependsOn (junitXmlListener)
+  lazy val junitXmlListener = uri(
+    "git://github.com/ijuma/junit_xml_listener.git#fe434773255b451a38e8d889536ebc260f4225ce"
+  )
+}
+    </pre>
+  </li>
+
+  <li class="slide">
+    <span>In <code>build.sbt</code></span>
+    <pre class="brush: scala;">
+      testListeners <<= target.map { t =>
+        Seq(
+          new eu.henkelmann.sbt.JUnitXmlTestsListener(
+            t.getAbsolutePath
+          )
+        )
+      }
+    </pre>
+  </li>
+</section>
+
+
+
+<!-- SECTION 4: Specs2 -->
+
+<section class="slide">
+  <h1>Section IV:<br>Specs2</h1>
+</section>
+
+<section class="slide">
+  <h2>Aside: continuous integration</h2>
+  <h3 class="slide">
+    Specs2 can natively output JUnit xml test reports, to make your build system happy.
+  </h3>
+  <div class="slide">
+    <pre class="brush: scala;">
+      testOptions += Tests.Argument(TestFrameworks.Specs2, "console", "junitxml")
+    </pre>
+  </div>
+</section>
+
+<!-- SECTION 5: Play -->
+
+<section class="slide">
+  <h1>Section V:<br>Play's integrations</h1>
+</section>
+
+<section class="slide">
+  <h2>What does Play provide?</h2>
+  <ul>
+    <li class="slide">
+      <h3>
+        Integrations for Specs2, which unfortunately are built against an outdated
+        version of Specs2
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        Selenium integrations
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        Various convenience functions for spinning up a web app to be tested
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        You can still use ScalaTest.
+      </h3>
+      <pre class="brush: scala;">
+        testOptions in Test := Nil // in build.sbt
+      </pre>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Aside: Test Isolation</h2>
+  <h3 class="slide">
+    Isolating tests is critical for avoiding non-determinism when tests access
+    shared resources like a database or file.
+  </h3>
+  <ul>
+    <li class="slide">
+      <h3>
+        Run only one test at a time, for a given subproject.
+      </h3>
+      <pre class="brush: scala;">
+        parallelExecution in Test := false
+      </pre>
+    </li>
+    <li class="slide">
+      <h3>
+        Run only one subproject's tests at a time.
+      </h3>
+      <pre class="brush: scala;">
+        parallelExecution in Global := false
+      </pre>
+    </li>
+  </ul>
+</section>
+
+
+
+<!-- CONCLUSION -->
+
+<section class="slide">
+  <h1>Conclusion</h1>
+</section>
+
+<section class="slide">
+  <h2>Advantages of ScalaTest</h2>
+  <ul>
+    <li class="slide">
+      <h3>
+        ScalaTest is more familiar coming from a JUnit/TestNG background.
+      </h3>
+    </li class="slide">
+    <li class="slide">
+      <h3>
+        ScalaTest has IDE support.
+      </h3>
+    </li class="slide">
+    <li class="slide">
+      <h3>
+        ScalaTest has a Selenium DSL independent from Play.
+      </h3>
+    </li class="slide">
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Advantages of Specs2</h2>
+  <ul>
+    <li class="slide">
+      <h3>
+        Specs2 has more, and more powerful, matchers.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        Specs2 has a far greater emphasis on <em>being</em> a readable specification,
+        and <em>generating</em> HTML specifications.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        Specs2 tests probably compose a bit better since the library is based on
+        explicit combinators instead of stackable modifications via traits.
+      </h3>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>My personal bottom line</h2>
+  <h3 class="slide">I use all three test frameworks</h3>
+  <ul>
+    <li class="slide">
+      <h3>
+        I prefer ScalaTest for testing highly impure code that needs extensive
+        set-up, take-down, and fixture support.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        I prefer Specs2 for testing code that is mostly pure.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        I use ScalaCheck whenever:
+        <ul>
+          <li class="slide">I'm testing pure code, and</li>
+          <li class="slide">I need the strongest possible correctness guarantees, and</li>
+          <li class="slide">I can figure out how to mock & generate the domain.</li>
+        </ul>
+      </h3>
+    </li>
+  </ul>
+</section>
+
+
+<section class="slide">
+  <h1>The end.</h1>
+  <h2>Thank you for coming!</h2>
+</section>
+
+
 
 
 
