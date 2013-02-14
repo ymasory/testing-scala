@@ -162,19 +162,29 @@
 
 <section class="slide">
   <h2>Testing techniques, without an oracle</h2>
+  <h3 class="slide">Metamorphic testing</h3>
   <ul>
-    <li>
-      <h3 class="slide">Metamorphic testing</h3>
-      <div class="slide">
-        "I don't know if A is true, but if it is, B must also be true!"
-      </div>
+    <li class="slide">
+      Identifying invariants to form assertions around statements you don't know to be true.
     </li>
-    <li>
-      <h3 class="slide">Fuzzing</h3>
-      <div class="slide">
-        Generating random or pathological inputs, to make your program barf.
-        Barfing is always wrong.
-      </div>
+    <li class="slide">
+      "I don't know if A is true, but if it is, B must also be true!"
+    </li>
+    <li class="slide">
+      E.g., "I know what the 10 * 9 is, but it must be less than 10 * 10!"
+    </li>
+  </ul>
+  <h3 class="slide">Fuzzing</h3>
+  <ul>      
+    <li class="slide">
+      Generating random or pathological inputs, to make your program barf.
+    </li>
+    <li class="slide">
+      Barfing is always wrong.
+    </li>
+    <li class="slide">
+      Where barfing may be throwing an exception, exiting, corrupting the output file,
+      launching a missle without the launch keys, etc.
     </li>
   </ul>
 </section>
