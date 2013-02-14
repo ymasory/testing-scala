@@ -111,10 +111,10 @@
     <li>
       <h3 class="slide">Behavior-driven development</h3>
       <ul>
-        <li class="slide">Builds on TDD.</li>
-        <li class="slide">Tests specify behavior via a readable title, narrative, and acceptance criteria.</li>
+        <li class="slide">Builds on TDD</li>
+        <li class="slide">Tests specify behavior via a readable title, narrative, and acceptance criteria</li>
         <li class="slide">
-          The tests (<em>aka</em> specification) is the "ubiquitous language" that facilitates conversation
+          The tests (<em>aka</em> specification) are the "ubiquitous language" that facilitates conversation
           between interested parties.
         </li>
       </ul>
@@ -143,7 +143,7 @@
         The test framework cooks up test cases automatically.
       </div>
     </li>
-    <li class="slide">
+    <li>
       <h3 class="slide">Object mocking</h3>
       <ul>
         <li class="slide">
@@ -472,7 +472,12 @@ class ExampleSpec extends FunSpec {
     <li class="slide"><h3>Matchers are not required in ScalaTest.</h3></li>
     <li class="slide"><h3><code>===</code> provides values in the error message.</h3></li>
     <li class="slide"><h3><code>expect(foo) { bar }</code> provides even better messages.</h3></li>
-    <li class="slide"><h3>Or better yet, use ScalaTest's matchers.</h3></li>
+    <li class="slide">
+      <h3>
+        Or better yet, use ScalaTest's matchers (e.g.,
+        <code>be</code>, <code>have</code>, <code>include</code>, etc.).
+      </h3>
+    </li>
   </ul>
 </section>
 
@@ -502,17 +507,21 @@ class ExampleSpec extends FunSpec {
   <h2>The really big picture</h2>
   <ul>
     <li class="slide">
-      ScalaTest is a <em>pragmatic</em> testing framework.
+      <h3>ScalaTest is a <em>pragmatic</em> testing framework.</h3>
     </li>
     <li class="slide">
-      It's versatile and infinitely flexible, letting you test in any style.
+      <h3>It's versatile and infinitely flexible, letting you test in any style.</h3>
     </li>
     <li class="slide">
-      When wielded with grace and style, beautiful tests can be written with little code and even less thought.
-      I find TDD iterations are shortest with ScalaTest.
+      <h3>
+        When wielded with grace and style, beautiful tests can be written with little code and even less thought.
+        I find TDD iterations are shortest with ScalaTest.
+      </h3>
     </li>
     <li class="slide">
-      When wielded ungracefully it becomes a Scala-ized JUnit, or a Specs2 clone with inadequate matchers. 
+      <h3>
+        When wielded ungracefully it becomes a Scala-ized JUnit, or a Specs2 clone with inadequate matchers. 
+      </h3>
     </li>
   </ul>
 </section>
@@ -674,17 +683,19 @@ class HelloWorldSpec extends Specification { def is =
   <h2>The really big picture</h2>
   <ul>
     <li class="slide">
-      Specs2 is a <em>functional</em> testing framework.
+      <h3>Specs2 is a <em>functional</em> testing framework.</h3>
     </li>
     <li class="slide">
-      It is religiously BDD, focusing on awesome matchers, readable code, and readable output.
+      <h3>It is religiously BDD, focusing on awesome matchers, readable code, and readable output.</h3>
     </li>
     <li class="slide">
-      When wielded with grace and style, your tests become executable documentation and an executable specification
-      that never falls out of date.
+      <h3>
+        When wielded with grace and style, your tests become executable documentation and an executable specification
+        that never falls out of date.
+      </h3>
     </li>
     <li class="slide">
-      When wielded ungracefully it's a program for outputting huge implicit-laden compiler errors.
+      <h3>When wielded ungracefully it's a program for outputting huge implicit-laden compiler errors.</h3>
     </li>
   </ul>
 </section>
@@ -771,6 +782,14 @@ class HelloWorldSpec extends Specification { def is =
       </h3>
     </li>
   </ul>
+</section>
+
+<section class="slide">
+  <h2>See the code</h2>
+  <h3 class="slide">
+    I'll be sending around example tests from some internal projects.
+    See those for the details on how to manipulate mock applications, requests and responses.
+  </h3>
 </section>
 
 
