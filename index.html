@@ -73,37 +73,132 @@
 <section class="slide">
   <h2>Levels of testing</h2>
   <ul>
-    <li class="slide"><h3>Unit testing</h3></li>
-    <li class="slide"><h3>Integration testing</h3></li>
-    <li class="slide"><h3>System testing</h3></li>
-    <li class="slide"><h3>Acceptance testing</h3></li>
+    <li>
+      <h3 class="slide">Unit testing</h3>
+      <div class="slide">Testing individual classes or functions in isolation</div>
+    </li>
+    <li>
+      <h3 class="slide">Integration testing</h3>
+      <div class="slide">Testing modules <em>as they interact</em></div>
+    </li>
+    <li>
+      <h3 class="slide">System testing</h3>
+      <div class="slide">
+        Testing the whole app, for performance, correctness, security, user acceptability,
+        or any other property of the app as a whole
+      </div>
+    </li>
+    <li>
+      <h3 class="slide">Acceptance testing</h3>
+      <div class="slide">
+        Specific tests agreed upon by all interested parties as the line in the sand for a "finished app".
+        This is often no more than User Acceptance Testing.
+      </div>
+    </li>
   </ul>
 </section>
 
 <section class="slide">
   <h2>Styles of <em>developing</em> tests</h2>
   <ul>
-    <li class="slide"><h3>Test-driven development</h3></li>
-    <li class="slide"><h3>Behavior-driven development</h3></li>
+    <li>
+      <h3 class="slide">Test-driven development</h3>
+      <div class="slide">
+        Writing tests before you write code, in short iterations.
+        When the tests pass, you move on to a new unit, starting with tests again. 
+      </div>
+    </li>
+    <li>
+      <h3 class="slide">Behavior-driven development</h3>
+      <ul>
+        <li class="slide">Builds on TDD.</li>
+        <li class="slide">Tests specify behavior via a readable title, narrative, and acceptance criteria.</li>
+        <li class="slide">
+          The tests (<em>aka</em> specification) is the "ubiquitous language" that facilitates conversation
+          between interested parties.
+        </li>
+      </ul>
+    </li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>Testing techniques</h2>
+  <h2>Testing techniques, with an oracle</h2>
   <ul>
-    <li class="slide"><h3>Hand-written assertions</h3></li>
-    <li class="slide"><h3>Assertions with matchers</h3></li>
-    <li class="slide"><h3>Property-based testing</h3></li>
-    <li class="slide"><h3>Metamorphic testing</h3></li>
-    <li class="slide"><h3>Object mocking</h3></li>
+    <li>
+      <h3 class="slide">Hand-written assertions</h3>
+      <div class="slide">Sorry, this is all JUnit/TestNG boil down to.</div>
+    </li>
+    <li>
+      <h3 class="slide">Assertions with matchers</h3>
+      <div class="slide">
+        Matchers dramatically increase the quality of error messages, encouraging tests as a ubiquitous
+        language, à la BDD.
+      </div>
+    </li>
+    <li>
+      <h3 class="slide">Property-based testing</h3>
+      <div class="slide">
+        You specify an abstract property.
+        The test framework cooks up test cases automatically.
+      </div>
+    </li>
+    <li class="slide">
+      <h3 class="slide">Object mocking</h3>
+      <ul>
+        <li class="slide">
+          Mock objects simulate objects that are mutable, non-deterministic, slow, or suffer from some defect that
+          makes testing difficult.
+        </li>
+        <li class="slide">
+          Mocking frameworks do everything from method stubbing to sophisticated tracking of method calls
+          and state mutations throughout an object's lifecycle.
+        </li>
+      </ul>
+    </li>
   </ul>
 </section>
+
+
+<section class="slide">
+  <h2>Testing techniques, without an oracle</h2>
+  <ul>
+    <li>
+      <h3 class="slide">Metamorphic testing</h3>
+      <div class="slide">
+        "I don't know if A is true, but if it is, B must also be true!"
+      </div>
+    </li>
+    <li>
+      <h3 class="slide">Fuzzing</h3>
+      <div class="slide">
+        Generating random or pathological inputs, to make your program barf.
+        Barfing is always wrong.
+      </div>
+    </li>
+  </ul>
+</section>
+
 
 <section class="slide">
   <h2>Major Scala test frameworks</h2>
   <ul>
     <li class="slide"><h3>Specs2 - BDD</h3></li>
+    <div class="slide">
+      <h3>
+        <a href="http://scalatypes.com/episode-23-eric-torreborre-on-specs2">
+          Interview with Eric Torreborre on Specs2
+        </a>
+      </h3>
+    </div>
     <li class="slide"><h3>ScalaTest - TDD alone, BDD</h3></li>
+    <div class="slide">
+      <h3>
+        <a href="http://scalatypes.com/episode-21-bill-venners-on-scala-types">
+          Interview with Bill Venners on ScalaTest
+        </a>
+      </h3>
+    </div>
     <li class="slide"><h3>ScalaCheck - PBT</h3></li>
   </ul>
 </section>
@@ -115,29 +210,7 @@
   </h3>
   <ul>
     <li class="slide"><h3>ScalaMock - object mocking</h3></li>
-    <li class="slide"><h3>Expecty - power assertions with macros</h3></li>
-  </ul>
-</section>
-
-
-<section class="slide">
-  <h2>Big question for your framework</h2>
-  <h3 class="slide">Should tests have a type?</h3>
-  <ul>
-    <li class="slide"><h3>ScalaTest, JUnit, TestNG, etc - NO</h3></li>
-    <li class="slide">
-      <h3>
-        <a href="http://scalatypes.com/episode-21-bill-venners-on-scala-types">
-          Interview with Bill Venners on ScalaTest
-        </a>
-      </h3>
-    </li>
-    <li class="slide"><h3>Specs2 - YES</h3></li>
-    <li class="slide"><h3>
-        <a href="http://scalatypes.com/episode-23-eric-torreborre-on-specs2">
-          Interview with Eric Torreborre on Specs2
-        </a>
-    </h3></li>
+    <li class="slide"><h3>Expecty - power assertions via macros</h3></li>
   </ul>
 </section>
 
@@ -333,6 +406,25 @@ $ scala -cp .:scalacheck.jar StringSpecification
 </section>
 
 <section class="slide">
+  <h2>The really big picture</h2>
+  <ul>
+    <li class="slide">
+      ScalaTest is a <em>pragmatic</em> testing framework.
+    </li>
+    <li class="slide">
+      It's versatile and infinitely flexible, letting you test in any style.
+    </li>
+    <li class="slide">
+      When wielded with grace and style, beautiful tests can be written with little code and even less thought.
+      I find TDD iterations are shortest with ScalaTest.
+    </li>
+    <li class="slide">
+      When wielded ungracefully it becomes a Scala-ized JUnit, or a Specs2 clone with inadequate matchers. 
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
   <h2>Aside: continuous integration</h2>
   <ul>
     <li class="slide">
@@ -342,8 +434,13 @@ $ scala -cp .:scalacheck.jar StringSpecification
     </li>
     <li class="slide">
       <h3>
-    Until then, there's <a href="https://github.com/hydrasi/junit_xml_listener">hydrasi/junit_xml_listener</a>,
-    an sbt plugin.
+        Until then, there's <a href="https://github.com/hydrasi/junit_xml_listener">hydrasi/junit_xml_listener</a>,
+        an sbt plugin.
+      </h3>
+    </li>
+    <li class="slide">
+      <h3>
+        ScalaTest has its own native format.
       </h3>
     </li>
   </ul>
@@ -381,12 +478,31 @@ object MyPlugins extends Build {
 </section>
 
 
-
 <!-- SECTION 4: Specs2 -->
 
 <section class="slide">
   <h1>Section IV:<br>Specs2</h1>
 </section>
+
+<section class="slide">
+  <h2>The really big picture</h2>
+  <ul>
+    <li class="slide">
+      Specs2 is a <em>functional</em> testing framework.
+    </li>
+    <li class="slide">
+      It is religiously BDD, focusing on awesome matchers, readable code, and readable output.
+    </li>
+    <li class="slide">
+      When wielded with grace and style, your tests become executable documentation and an executable specification
+      that never falls out of date.
+    </li>
+    <li class="slide">
+      When wielded ungracefully it's a program for outputting huge implicit-laden compiler errors.
+    </li>
+  </ul>
+</section>
+
 
 <section class="slide">
   <h2>Aside: continuous integration</h2>
@@ -395,7 +511,9 @@ object MyPlugins extends Build {
   </h3>
   <div class="slide">
     <pre class="brush: scala;">
-      testOptions += Tests.Argument(TestFrameworks.Specs2, "console", "junitxml")
+      testOptions += Tests.Argument(
+        TestFrameworks.Specs2, "console", "junitxml"
+      )
     </pre>
   </div>
 </section>
